@@ -1,3 +1,10 @@
+const { createClient } = supabase;
+
+const supabaseClient = createClient(
+    "https://hrinrvplfdeetfpyenkk.supabase.co",
+    "sb_publishable_RX5jwT6HKs4B2n8bpAWUJQ_5gvWwIfI"
+    );
+
 const yesBtn = document.getElementById("yesBtn");
 const noBtn = document.getElementById("noBtn");
 
@@ -8,9 +15,9 @@ const page3 = document.getElementById("page3");
 const confirmBtn = document.getElementById("confirmBtn");
 const chosenDate = document.getElementById("chosenDate");
 
+const nameInput = document.getElementById("name");
 const dateInput = document.getElementById("date");
 const timeInput = document.getElementById("time");
-
 // Background Music
 const bgMusic = document.getElementById("bgMusic");
 
@@ -95,15 +102,33 @@ yesBtn.addEventListener("click", () => {
 
 });
 
-confirmBtn.addEventListener("click", () => {
+confirmBtn.addEventListener("click", async () => {
 
-    if (dateInput.value === "" || timeInput.value === "") {
+   if (
+    nameInput.value === "" ||
+    dateInput.value === "" ||
+    timeInput.value === ""
+) {
+    alert("Please enter your name and choose our date ❤️");
+    return;
+}
+    
 
-        alert("Choose our date first ❤️");
-        return;
-
+    const { error } = await supabaseClient
+    .from("responses")
+    .insert([
+    {
+        name: nameInput.value,
+        date: dateInput.value,
+        time: timeInput.value
     }
+]);
 
+if (error) {
+    console.error(error);
+    alert("Failed to save.");
+    return;
+}
     page2.classList.add("hidden");
     page3.classList.remove("hidden");
 
