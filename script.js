@@ -126,7 +126,7 @@ confirmBtn.addEventListener("click", async () => {
 
 if (error) {
     console.error(error);
-    alert("Failed to save.");
+    alert(error.message);
     return;
 }
     page2.classList.add("hidden");
