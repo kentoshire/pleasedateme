@@ -332,9 +332,6 @@ if (dashboard) {
     const dashboardDate = document.getElementById("dateTime");
 
 
-    const urlParams = new URLSearchParams(window.location.search);
-
-    const invitationId = urlParams.get("id");
 
 
 
