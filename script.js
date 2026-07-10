@@ -330,28 +330,41 @@ const dashboard = document.getElementById("dashboard");
 
 if (dashboard) {
 
-
     const dashboardName = document.getElementById("partnerName");
     const dashboardDate = document.getElementById("dateTime");
-
-
-
 
 
     async function loadResponse(){
 
 
+        console.log("Current ID:", invitationId);
+
+
         const { data, error } = await supabaseClient
             .from("responses")
             .select("*")
-            .eq("invitation_id", invitationId)
-            .single();
+            .eq("invitation_id", invitationId);
+
+
+
+        console.log("Data:", data);
+        console.log("Error:", error);
 
 
 
         if(error){
 
             console.log(error);
+
+            dashboardName.innerHTML =
+            "Error loading response";
+
+            return;
+
+        }
+
+
+        if(!data || data.length === 0){
 
             dashboardName.innerHTML =
             "No response yet 💔";
@@ -362,16 +375,19 @@ if (dashboard) {
 
 
 
+        const response = data[0];
+
+
         dashboardName.innerHTML =
-        "❤️ " + data.name;
+        "❤️ " + response.name;
 
 
 
         dashboardDate.innerHTML =
         `
-        📅 ${data.date}
+        📅 ${response.date}
         <br><br>
-        🕒 ${data.time}
+        🕒 ${response.time}
         `;
 
 
@@ -380,7 +396,4 @@ if (dashboard) {
 
     loadResponse();
 
-
 }
-
-
