@@ -10,8 +10,10 @@ const supabaseClient = createClient(
 );
 
 const urlParams = new URLSearchParams(window.location.search);
-const invitationId = urlParams.get("id");
 
+let invitationId = urlParams.get("id");
+
+console.log("Current Invitation ID:", invitationId);
 // =============================
 // CREATE INVITATION (index.html)
 // =============================
