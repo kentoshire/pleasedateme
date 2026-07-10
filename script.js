@@ -1,78 +1,3 @@
-// =============================
-// SUPABASE CONNECTION
-// =============================
-
-const { createClient } = supabase;
-
-const supabaseClient = createClient(
-    "https://hrinrvplfdeetfpyenkk.supabase.co",
-    "sb_publishable_RX5jwT6HKs4B2n8bpAWUJQ_5gvWwIfI"
-);
-
-const urlParams = new URLSearchParams(window.location.search);
-const invitationId = urlParams.get("id");
-
-// =============================
-// CREATE INVITATION (index.html)
-// =============================
-
-const createBtn = document.getElementById("createBtn");
-const ownerName = document.getElementById("ownerName");
-const result = document.getElementById("result");
-
-if (createBtn) {
-
-    createBtn.addEventListener("click", async () => {
-
-        if (ownerName.value.trim() === "") {
-            alert("Enter your name first ❤️");
-            return;
-        }
-
-
-        const { data, error } = await supabaseClient
-            .from("invitations")
-            .insert([
-                {
-                    owner_name: ownerName.value,
-                    status: "active"
-                }
-            ])
-            .select()
-            .single();
-
-
-        if (error) {
-            console.error(error);
-            alert(error.message);
-            return;
-        }
-
-
-        const link = 
-        `${window.location.origin}/invite.html?id=${data.id}`;
-
-
-        result.innerHTML = `
-        🎉 Your invitation is ready! ❤️
-        <br><br>
-
-        <input value="${link}" readonly style="width:90%">
-
-        <br><br>
-
-        Copy this link and send it to your partner 💕
-        `;
-
-    });
-
-}
-
-
-// =============================
-// ROMANTIC PAGE (invite.html)
-// =============================
-
 const yesBtn = document.getElementById("yesBtn");
 const noBtn = document.getElementById("noBtn");
 
@@ -86,219 +11,137 @@ const chosenDate = document.getElementById("chosenDate");
 const dateInput = document.getElementById("date");
 const timeInput = document.getElementById("time");
 
+// Background Music
 const bgMusic = document.getElementById("bgMusic");
 
+const noMessages = [
+    "Are you sure? 🥺",
+    "Really? 😭",
+    "Think again ❤️",
+    "Please? 🥹",
+    "Pretty please? 💕",
+    "I'll buy you food 🍕",
+    "I'll buy you milk tea 🧋",
+    "I'll bring flowers 🌹",
+    "Don't break my heart 💔",
+    "Last chance 😭",
+    "You can't escape 😂"
+];
 
-if (yesBtn && noBtn) {
+let clickCount = 0;
+let yesScale = 1;
 
-    const noMessages = [
-        "Are you sure? 🥺",
-        "Really? 😭",
-        "Think again ❤️",
-        "Please? 🥹",
-        "Pretty please? 💕",
-        "I'll buy you food 🍕",
-        "I'll buy you milk tea 🧋",
-        "I'll bring flowers 🌹",
-        "Don't break my heart 💔",
-        "Last chance 😭",
-        "You can't escape 😂"
-    ];
+noBtn.addEventListener("click", () => {
 
+    clickCount++;
 
-    let clickCount = 0;
-    let yesScale = 1;
+    if (clickCount < noMessages.length) {
+        noBtn.innerText = noMessages[clickCount];
+    }
 
+    yesScale += 0.25;
+    yesBtn.style.transform = `scale(${yesScale})`;
 
-    noBtn.addEventListener("click", () => {
+    if (clickCount >= 5) {
 
-        clickCount++;
+        noBtn.style.position = "absolute";
 
+        const maxX = window.innerWidth - noBtn.offsetWidth - 20;
+        const maxY = window.innerHeight - noBtn.offsetHeight - 20;
 
-        if (clickCount < noMessages.length) {
-            noBtn.innerText = noMessages[clickCount];
-        }
+        const randomX = Math.random() * maxX;
+        const randomY = Math.random() * maxY;
 
+        noBtn.style.left = randomX + "px";
+        noBtn.style.top = randomY + "px";
+    }
 
-        yesScale += 0.25;
-        yesBtn.style.transform = `scale(${yesScale})`;
+});
 
+yesBtn.addEventListener("click", () => {
 
-        if (clickCount >= 5) {
+    // Play music with fade-in
+    if (bgMusic && bgMusic.paused) {
 
-            noBtn.style.position = "absolute";
+        bgMusic.volume = 0;
 
+        bgMusic.play().catch(error => {
+            console.log("Music couldn't play:", error);
+        });
 
-            const maxX =
-            window.innerWidth - noBtn.offsetWidth - 20;
+        let volume = 0;
 
-            const maxY =
-            window.innerHeight - noBtn.offsetHeight - 20;
+        const fade = setInterval(() => {
 
+            if (volume < 0.4) {
+                volume += 0.02;
+                bgMusic.volume = volume;
+            } else {
+                clearInterval(fade);
+            }
 
-            noBtn.style.left =
-            Math.random() * maxX + "px";
+        }, 100);
 
+    }
 
-            noBtn.style.top =
-            Math.random() * maxY + "px";
+    createHearts();
 
-        }
+    setTimeout(() => {
 
-    });
+        page1.classList.add("hidden");
+        page2.classList.remove("hidden");
 
+    }, 1500);
 
+});
 
-    yesBtn.addEventListener("click", () => {
+confirmBtn.addEventListener("click", () => {
 
+    if (dateInput.value === "" || timeInput.value === "") {
 
-        if (bgMusic && bgMusic.paused) {
+        alert("Choose our date first ❤️");
+        return;
 
-            bgMusic.volume = 0;
+    }
 
-            bgMusic.play();
+    page2.classList.add("hidden");
+    page3.classList.remove("hidden");
 
-
-            let volume = 0;
-
-
-            const fade = setInterval(() => {
-
-                if (volume < 0.4) {
-
-                    volume += 0.02;
-                    bgMusic.volume = volume;
-
-                } else {
-
-                    clearInterval(fade);
-
-                }
-
-            },100);
-
-        }
-
-
-        createHearts();
-
-
-        setTimeout(() => {
-
-            page1.classList.add("hidden");
-            page2.classList.remove("hidden");
-
-        },1500);
-
-    });
-
-
-}
-
-
-
-// =============================
-// DATE CONFIRMATION
-// =============================
-
-if (confirmBtn) {
-
-    confirmBtn.addEventListener("click", async () => {
-
-
-        if (
-            dateInput.value === "" ||
-            timeInput.value === ""
-        ) {
-
-            alert("Choose our date first ❤️");
-            return;
-
-        }
-
-
-        if (!invitationId) {
-
-            alert("Invalid invitation link");
-            return;
-
-        }
-
-
-        const { error } = await supabaseClient
-            .from("responses")
-            .insert([
-                {
-                    invitation_id: invitationId,
-                    date: dateInput.value,
-                    time: timeInput.value
-                }
-            ]);
-
-
-        if (error) {
-
-            console.error(error);
-            alert(error.message);
-            return;
-
-        }
-
-
-        page2.classList.add("hidden");
-        page3.classList.remove("hidden");
-
-
-        chosenDate.innerHTML =
+    chosenDate.innerHTML =
         `📅 ${dateInput.value}<br><br>🕒 ${timeInput.value}`;
 
-
-    });
-
-}
-
-
-
-
-// =============================
-// HEART ANIMATION
-// =============================
+});
 
 function createHearts() {
 
     for (let i = 0; i < 80; i++) {
-
 
         let heart = document.createElement("div");
 
         heart.innerHTML = "💖";
 
         heart.style.position = "fixed";
-        heart.style.left = Math.random()*100+"vw";
+        heart.style.left = Math.random() * 100 + "vw";
         heart.style.top = "100vh";
-        heart.style.fontSize =
-        (20 + Math.random()*30)+"px";
-
-        heart.style.pointerEvents="none";
-        heart.style.transition="all 3s linear";
-
+        heart.style.fontSize = (20 + Math.random() * 30) + "px";
+        heart.style.pointerEvents = "none";
+        heart.style.transition = "all 3s linear";
 
         document.body.appendChild(heart);
 
+        setTimeout(() => {
 
-        setTimeout(()=>{
+            heart.style.top = "-100px";
+            heart.style.transform = `translateX(${Math.random() * 300 - 150}px) rotate(${Math.random() * 360}deg)`;
+            heart.style.opacity = 0;
 
-            heart.style.top="-100px";
-            heart.style.opacity=0;
+        }, 50);
 
-        },50);
-
-
-        setTimeout(()=>{
+        setTimeout(() => {
 
             heart.remove();
 
-        },3000);
+        }, 3000);
 
     }
 
