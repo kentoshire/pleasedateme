@@ -17,21 +17,22 @@
 <!-- PAGE 1 -->
 <div id="page1">
 
-    <h1>
-        Will you be my date? ❤️
-    </h1>
+    <div class="container">
+
+        <h1>Will you be my date? ❤️</h1>
+
+        <div class="button-container">
+
+            <button id="yesBtn">
+                YES ❤️
+            </button>
 
 
-    <div class="buttons">
+            <button id="noBtn">
+                NO 😭
+            </button>
 
-        <button id="yesBtn">
-            YES ❤️
-        </button>
-
-
-        <button id="noBtn">
-            NO 😭
-        </button>
+        </div>
 
     </div>
 
@@ -40,69 +41,61 @@
 
 
 
+
 <!-- PAGE 2 -->
 <div id="page2" class="hidden">
 
+    <div class="container">
 
-    <h1>
-        Yayyyy! 🥰
-    </h1>
-
-
-    <p>
-        Before we continue...
-    </p>
+        <h1>Yay! 🥰</h1>
 
 
-    <label>
-        Your Name ❤️
-    </label>
+        <label>
+            Your Name ❤️
+        </label>
 
-    <br>
-
-
-    <input 
-        type="text"
-        id="partnerName"
-        placeholder="Enter your name">
+        <br>
 
 
-    <br><br>
+        <input 
+            type="text"
+            id="partnerName"
+            placeholder="Enter your name">
 
 
-
-    <h2>
-        Choose our date 💕
-    </h2>
+        <br><br>
 
 
-
-    <input 
-        type="date"
-        id="date">
-
+        <h2>
+            Choose our date 💕
+        </h2>
 
 
-    <br><br>
+        <input 
+            type="date"
+            id="date">
 
 
-
-    <input 
-        type="time"
-        id="time">
+        <br><br>
 
 
+        <input 
+            type="time"
+            id="time">
 
-    <br><br>
+
+        <br><br>
 
 
+        <button id="confirmBtn">
+            Confirm ❤️
+        </button>
 
-    <button id="confirmBtn">
-        Confirm ❤️
-    </button>
 
+    </div>
 
 </div>
+
 
 
 
@@ -111,29 +104,30 @@
 <!-- PAGE 3 -->
 <div id="page3" class="hidden">
 
+    <div class="container">
 
-    <h1>
-        It's a date! 💖
-    </h1>
-
-
-
-    <p>
-        Your chosen schedule:
-    </p>
+        <h1>
+            It's a date! 💖
+        </h1>
 
 
+        <p>
+            Your chosen schedule:
+        </p>
 
-    <h2 id="chosenDate"></h2>
+
+        <h2 id="chosenDate"></h2>
 
 
+        <p>
+            Can't wait to see you ❤️
+        </p>
 
-    <p>
-        Can't wait to see you ❤️
-    </p>
 
+    </div>
 
 </div>
+
 
 
 
@@ -148,15 +142,9 @@
 
 
 
-
-
-<!-- SUPABASE -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-
-<!-- YOUR SCRIPT -->
 <script src="script.js"></script>
-
 
 
 </body>
