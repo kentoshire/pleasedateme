@@ -2,12 +2,13 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Our Date ❤️</title>
+<title>Our Date ❤️</title>
 
-    <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css">
+
 </head>
 
 
@@ -15,29 +16,31 @@
 
 
 <!-- PAGE 1 -->
-<div id="page1">
+<div id="page1" class="container">
 
-    <div class="container">
+    <h1>
+        Will you be my date? ❤️
+    </h1>
 
-        <h1>Will you be my date? ❤️</h1>
-
-        <div class="button-container">
-
-            <button id="yesBtn">
-                YES ❤️
-            </button>
+    <p class="question">
+        I have something special to ask you 💕
+    </p>
 
 
-            <button id="noBtn">
-                NO 😭
-            </button>
+    <div class="buttons">
 
-        </div>
+        <button id="yesBtn">
+            YES ❤️
+        </button>
+
+
+        <button id="noBtn">
+            NO 😭
+        </button>
 
     </div>
 
 </div>
-
 
 
 
@@ -45,57 +48,59 @@
 <!-- PAGE 2 -->
 <div id="page2" class="hidden">
 
-    <div class="container">
-
-        <h1>Yay! 🥰</h1>
-
-
-        <label>
-            Your Name ❤️
-        </label>
-
-        <br>
+    <h1>
+        Yay! 🥰
+    </h1>
 
 
-        <input 
-            type="text"
-            id="partnerName"
-            placeholder="Enter your name">
+    <p class="question">
+        Tell me your details 💕
+    </p>
 
 
-        <br><br>
+    <label>
+        Your Name ❤️
+    </label>
+
+    <br>
 
 
-        <h2>
-            Choose our date 💕
-        </h2>
+    <input 
+        type="text"
+        id="partnerName"
+        placeholder="Enter your name">
 
 
-        <input 
-            type="date"
-            id="date">
+    <br><br>
 
 
-        <br><br>
+    <h2>
+        Choose our date 💕
+    </h2>
 
 
-        <input 
-            type="time"
-            id="time">
+    <input 
+        type="date"
+        id="date">
 
 
-        <br><br>
+    <br>
 
 
-        <button id="confirmBtn">
-            Confirm ❤️
-        </button>
+    <input 
+        type="time"
+        id="time">
 
 
-    </div>
+    <br><br>
+
+
+    <button id="confirmBtn">
+        Confirm ❤️
+    </button>
+
 
 </div>
-
 
 
 
@@ -104,27 +109,27 @@
 <!-- PAGE 3 -->
 <div id="page3" class="hidden">
 
-    <div class="container">
-
-        <h1>
-            It's a date! 💖
-        </h1>
+    <h1>
+        It's a date! 💖
+    </h1>
 
 
-        <p>
-            Your chosen schedule:
-        </p>
+    <p class="question">
+        Your chosen schedule:
+    </p>
 
 
-        <h2 id="chosenDate"></h2>
+    <h2 id="chosenDate"></h2>
 
 
-        <p>
-            Can't wait to see you ❤️
-        </p>
+    <div class="letter">
 
+        Thank you for saying yes ❤️
+        <br><br>
+        I can't wait to spend time with you 💕
 
     </div>
+
 
 </div>
 
@@ -132,8 +137,6 @@
 
 
 
-
-<!-- MUSIC -->
 <audio id="bgMusic" loop>
 
     <source src="music.mp3" type="audio/mpeg">
