@@ -49,24 +49,38 @@ if (createBtn) {
         }
 
 
-        const link = 
-        `${window.location.origin}/invite.html?id=${data.id}`;
+const inviteLink =
+`${window.location.origin}/invite.html?id=${data.id}`;
 
 
-        result.innerHTML = `
-        🎉 Your invitation is ready! ❤️
-        <br><br>
+const dashboardLink =
+`${window.location.origin}/dashboard.html?id=${data.id}`;
 
-        <input value="${link}" readonly style="width:90%">
 
-        <br><br>
 
-        Copy this link and send it to your partner 💕
-        `;
+result.innerHTML = `
+🎉 Your invitation is ready! ❤️
 
-    });
+<br><br>
 
-}
+<b>Send this to your partner:</b>
+
+<br>
+
+<input value="${inviteLink}" readonly style="width:90%">
+
+
+<br><br>
+
+
+<b>Your Dashboard:</b>
+
+<br>
+
+<input value="${dashboardLink}" readonly style="width:90%">
+
+
+`;
 
 
 // =============================
@@ -85,6 +99,7 @@ const chosenDate = document.getElementById("chosenDate");
 
 const dateInput = document.getElementById("date");
 const timeInput = document.getElementById("time");
+const partnerName = document.getElementById("partnerName");
 
 const bgMusic = document.getElementById("bgMusic");
 
@@ -301,5 +316,69 @@ function createHearts() {
         },3000);
 
     }
+
+}
+// =============================
+// DASHBOARD PAGE
+// =============================
+
+const dashboard = document.getElementById("dashboard");
+
+
+if (dashboard) {
+
+
+    const dashboardName = document.getElementById("partnerName");
+    const dashboardDate = document.getElementById("dateTime");
+
+
+    const urlParams = new URLSearchParams(window.location.search);
+
+    const invitationId = urlParams.get("id");
+
+
+
+    async function loadResponse(){
+
+
+        const { data, error } = await supabaseClient
+            .from("responses")
+            .select("*")
+            .eq("invitation_id", invitationId)
+            .single();
+
+
+
+        if(error){
+
+            console.log(error);
+
+            dashboardName.innerHTML =
+            "No response yet 💔";
+
+            return;
+
+        }
+
+
+
+        dashboardName.innerHTML =
+        "❤️ " + data.name;
+
+
+
+        dashboardDate.innerHTML =
+        `
+        📅 ${data.date}
+        <br><br>
+        🕒 ${data.time}
+        `;
+
+
+    }
+
+
+    loadResponse();
+
 
 }
