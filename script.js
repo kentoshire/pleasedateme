@@ -224,16 +224,16 @@ if (confirmBtn) {
 
         }
 
-
-        const { error } = await supabaseClient
-            .from("responses")
-            .insert([
-                {
-                    invitation_id: invitationId,
-                    date: dateInput.value,
-                    time: timeInput.value
-                }
-            ]);
+const { error } = await supabaseClient
+    .from("responses")
+    .insert([
+        {
+            invitation_id: invitationId,
+            name: partnerName.value,
+            date: dateInput.value,
+            time: timeInput.value
+        }
+    ]);
 
 
         if (error) {
