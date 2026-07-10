@@ -243,7 +243,8 @@ if (confirmBtn) {
             return;
 
         }
-
+        
+console.log("Saving response for ID:", invitationId);
 const { error } = await supabaseClient
     .from("responses")
     .insert([
