@@ -332,35 +332,34 @@ const dashboard = document.getElementById("dashboard");
 
 if (dashboard) {
 
-    const dashboardName = document.getElementById("partnerName");
+    const dashboardName = document.getElementById("dashboardPartnerName");
     const dashboardDate = document.getElementById("dateTime");
+
+
+    const dashboardParams = new URLSearchParams(window.location.search);
+    const dashboardId = dashboardParams.get("id");
+
+
+    console.log("DASHBOARD ID:", dashboardId);
 
 
     async function loadResponse(){
 
 
-        console.log("Current ID:", invitationId);
-
-
         const { data, error } = await supabaseClient
             .from("responses")
             .select("*")
-            .eq("invitation_id", invitationId);
+            .eq("invitation_id", dashboardId);
 
 
-
-        console.log("Data:", data);
-        console.log("Error:", error);
+        console.log("SUPABASE DATA:", data);
+        console.log("SUPABASE ERROR:", error);
 
 
 
         if(error){
 
-            console.log(error);
-
-            dashboardName.innerHTML =
-            "Error loading response";
-
+            dashboardName.innerHTML = "Error loading data ❌";
             return;
 
         }
@@ -368,28 +367,21 @@ if (dashboard) {
 
         if(!data || data.length === 0){
 
-            dashboardName.innerHTML =
-            "No response yet 💔";
-
+            dashboardName.innerHTML = "No response yet 💔";
             return;
 
         }
 
 
-
-        const response = data[0];
-
-
         dashboardName.innerHTML =
-        "❤️ " + response.name;
-
+        "❤️ " + data[0].name;
 
 
         dashboardDate.innerHTML =
         `
-        📅 ${response.date}
+        📅 ${data[0].date}
         <br><br>
-        🕒 ${response.time}
+        🕒 ${data[0].time}
         `;
 
 
