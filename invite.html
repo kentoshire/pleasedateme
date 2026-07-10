@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,34 +10,49 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
+
 <body>
 
 
 <!-- PAGE 1 -->
 <div id="page1">
 
-    <h1>Will you be my date? ❤️</h1>
+    <h1>
+        Will you be my date? ❤️
+    </h1>
 
-    <div>
+
+    <div class="buttons">
+
         <button id="yesBtn">
             YES ❤️
         </button>
 
+
         <button id="noBtn">
             NO 😭
         </button>
+
     </div>
 
 </div>
 
 
 
+
 <!-- PAGE 2 -->
 <div id="page2" class="hidden">
 
-    <h1>Yay! 🥰</h1>
 
-    <h2>Before we continue...</h2>
+    <h1>
+        Yay! 🥰
+    </h1>
+
+
+    <p>
+        Before we continue...
+    </p>
+
 
     <label>
         Your Name ❤️
@@ -44,12 +60,15 @@
 
     <br>
 
+
     <input 
         type="text"
         id="partnerName"
         placeholder="Enter your name">
 
+
     <br><br>
+
 
 
     <h2>
@@ -57,20 +76,25 @@
     </h2>
 
 
+
     <input 
-        type="date" 
+        type="date"
         id="date">
 
 
+
     <br><br>
+
 
 
     <input 
-        type="time" 
+        type="time"
         id="time">
 
 
+
     <br><br>
+
 
 
     <button id="confirmBtn">
@@ -83,12 +107,15 @@
 
 
 
+
 <!-- PAGE 3 -->
 <div id="page3" class="hidden">
+
 
     <h1>
         It's a date! 💖
     </h1>
+
 
 
     <p>
@@ -96,29 +123,42 @@
     </p>
 
 
+
     <h2 id="chosenDate"></h2>
+
 
 
     <p>
         Can't wait to see you ❤️
     </p>
 
+
 </div>
+
 
 
 
 
 <!-- MUSIC -->
 <audio id="bgMusic" loop>
+
     <source src="music.mp3" type="audio/mpeg">
+
 </audio>
 
 
 
+
+
+<!-- SUPABASE -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+
+<!-- YOUR SCRIPT -->
 <script src="script.js"></script>
 
 
+
 </body>
+
 </html>
