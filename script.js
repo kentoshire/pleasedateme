@@ -79,8 +79,11 @@ result.innerHTML = `
 
 <input value="${dashboardLink}" readonly style="width:90%">
 
-
 `;
+    
+    });
+
+}
 
 
 // =============================
